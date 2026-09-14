@@ -1,6 +1,7 @@
 {
   "name": "scrape",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "railcode dev"
