@@ -1,0 +1,33 @@
+# Dependencies and generated output.
+node_modules/
+dist/
+coverage/
+*.log
+
+# Credentials and local environment configuration.
+.env
+.env.*
+!.env.example
+!.env.*.example
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
+.npmrc
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Railcode instance / organization / deployment state and local runtime data.
+.railcode
+.railcode.*
+.wrangler/
+
+# Locally installed agent tooling and personal settings.
+.agents/
+.claude/
+.codex/
+skills-lock.json
+.idea/
+.vscode/
+.DS_Store

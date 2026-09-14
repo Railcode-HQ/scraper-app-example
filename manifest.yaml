@@ -1,0 +1,24 @@
+run_as: app
+
+# The YC directory is Algolia-backed. This worker queries the very same public
+# index the ycombinator.com client queries, so search, facet counts, and ranking
+# are the real thing rather than a stale copy.
+#
+# Keep this list in step with DIRECT_HOSTS in server/index.ts — `railcode dev`
+# does NOT enforce egress, so the code gate is what stops a host working locally
+# and 403ing in production.
+egress:
+  # Algolia DSN + its per-app retry hosts.
+  - "*.algolia.net"
+  - "*.algolianet.com"
+  # The public search key is embedded in the companies page. The worker
+  # re-reads it there so a key rotation doesn't take the app down.
+  - ycombinator.com
+  - "*.ycombinator.com"
+  # Company logos, proxied so they render regardless of the page's CSP.
+  - bookface-images.s3.amazonaws.com
+
+# Exa runs the extraction workflows: one grounded /answer call per company,
+# with an outputSchema so the result comes back as JSON rather than prose.
+connectors:
+  exa: ["POST /answer"]
